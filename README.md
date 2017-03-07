@@ -44,4 +44,4 @@ So if we go with the example from above, you would add the following tag inside 
 </button4>
 
 After these steps, you should be good to go.
-Let me know if something is unclear of if you struggling to get this project/service running.
+Let me know if something is unclear or if you struggling to get this project/service running.
