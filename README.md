@@ -1,7 +1,7 @@
 # ADBSrv
 Amazon Dash Button Service
 
-A niet little Windows-Service to detect the button-pushed-event from an AmazonDashButton
+A neat little Windows-Service to detect the button-pushed-event from an AmazonDashButton
 
 Parts of the code are from user "Youresam" https://github.com/youresam/Dash-Button.
 
