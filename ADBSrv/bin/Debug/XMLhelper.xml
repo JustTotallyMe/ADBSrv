@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>XMLhelper</name>
+    </assembly>
+    <members>
+        <member name="M:XMLhelper.XMLReader.#ctor(System.Boolean,System.String)">
+            <summary>
+            Constructor of XMLReader Class
+            </summary>
+            <param name="isConfigXML">Set to true if all that needs to read is the config.xml</param>
+            <param name="xPath">If isConfigXML = false, you have to enter a XMLPath</param>
+        </member>
+        <member name="M:XMLhelper.XMLReader.returnSingleNodeEntry(System.String)">
+            <summary>
+            Method to return the value of one single element in any xml-File
+            </summary>
+            <param name="nodeName">The name of the XML-Element</param>
+            <returns>Returns a string with the value</returns>
+        </member>
+        <member name="M:XMLhelper.XMLReader.returnMutipleNodesWithSameName(System.String)">
+            <summary>
+            Method to return the value for an element with the same name
+            </summary>
+            <param name="nodeName">The name of the XML-Elemen</param>
+            <returns>Returns a Queue of type string with all the values</returns>
+        </member>
+        <member name="M:XMLhelper.XMLReader.returnAllChildNodesFromParent(System.String,System.Boolean)">
+            <summary>
+            Method to return the values of all child elements of the selected parent element
+            </summary>
+            <param name="parentNodeName">The name of the parent element</param>
+            <param name="StringWithNodeNameAndValue">true = ElementName|value false = only values</param>
+            <returns>Returns a Queue of type string with either the elment name and values or just values</returns>
+        </member>
+        <member name="M:XMLhelper.XMLWriter.#ctor(System.Boolean,System.String)">
+            <summary>
+            Constructor of XMLWriter Class
+            </summary>
+            <param name="isConfigXML">Set to true if all that needs to read is the config.xml</param>
+            <param name="xPath">If isConfigXML = false, you have to enter a XMLPath</param>
+        </member>
+        <member name="M:XMLhelper.XMLWriter.modifySingleNodeEntry(System.String,System.String)">
+            <summary>
+            Method to modify the value of one xml element
+            </summary>
+            <param name="nodeName">The name of the XML-Elemen</param>
+            <param name="nodeValue">New value to be set</param>
+        </member>
+        <member name="M:XMLhelper.XMLWriter.deleteSingleNode(System.String)">
+            <summary>
+            Method to delete one specified element
+            </summary>
+            <param name="nodeName">The name of the XML-Elemen</param>
+        </member>
+        <member name="M:XMLhelper.XMLWriter.createNewNode(System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Method to create a new xml element
+            </summary>
+            <param name="nodeName">The name of the XML-Elemen</param>
+            <param name="newNodeName">The name of the new XML-Elemen</param>
+            <param name="Value">set if the element should have a value</param>
+            <param name="isParent">If value is filled, this must be set to false</param>
+        </member>
+    </members>
+</doc>
