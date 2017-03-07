@@ -9,7 +9,7 @@ The Service can be configured like this:
 
 There are 2 config-files:
 
-1. ADBSrv.exe.config:
+1) ADBSrv.exe.config:
 
 Inside this config you need to enter the MAC-Address of the Dashbutton you like to use.
 Also you can set the following things:
@@ -28,7 +28,7 @@ To set up the dashbuttons inside this config, you simply need to add the followi
 The name has to start with the word "Dash" and needs to end with a continous number. So if you add a forth button to the config the name
 should be "DashMac4".
 
-2. ButtonConfig.xml
+2) ButtonConfig.xml
 
 In this config you set up the DLLs and used Class- and Method-name which is being executed when the butto-press was detected.
 
