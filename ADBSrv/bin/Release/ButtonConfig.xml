@@ -2,20 +2,22 @@
 <config>
   <buttons>
     <button1>
-      <name>Durex</name>
+      <name>Button1</name>
       <MACaddress>AC:63:BE:03:D1:34</MACaddress>
       <DLLPath>C:\Temp\test.dll</DLLPath>
       <ClassName>TestClass</ClassName>
       <MethodName>SayHi</MethodName>
     </button1>
     <button2>
-      <name></name>
-      <MACaddress></MACaddress>
-      <DLLPath></DLLPath>
+      <name>Button2</name>
+      <MACaddress>AC:63:BE:03:D1:35</MACaddress>
+      <DLLPath>C:\Temp\test.dll</DLLPath>
+      <ClassName>TestClass</ClassName>
+      <MethodName>SayHi</MethodName>
     </button2>
     <button3>
-      <name>Durex</name>
-      <MACaddress>AC:63:BE:03:D1:34</MACaddress>
+      <name>Button3</name>
+      <MACaddress>AC:63:BE:03:D1:36</MACaddress>
       <DLLPath>C:\Temp\test.dll</DLLPath>
       <ClassName>TestClass</ClassName>
       <MethodName>SayHi</MethodName>
