@@ -17,7 +17,7 @@ namespace ADBSrv_NS
             ServiceBase[] ServicesToRun;
             ServicesToRun = new ServiceBase[]
             {
-                new ADBSrv_Main()
+                new ADBSrv()
             };
             ServiceBase.Run(ServicesToRun);
         }

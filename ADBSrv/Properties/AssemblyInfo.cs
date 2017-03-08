@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("ADBSrv")]
-[assembly: AssemblyDescription("Amazon Dash Button Service")]
+[assembly: AssemblyDescription("Amazon Dash Button  Service")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("I&C Forge")]
 [assembly: AssemblyProduct("ADBSrv")]

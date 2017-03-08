@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<config>
+  <buttons>
+    <button1>
+      <name></name>
+      <mac></mac>
+      <dllPath></dllPath>
+      <className></className>
+      <methodName></methodName>
+      <overloadValue></overloadValue>
+    </button1>
+    <button2>
+      <name></name>
+      <mac></mac>
+      <dllPath></dllPath>
+      <className></className>
+      <methodName></methodName>
+      <overloadValue></overloadValue>
+    </button2>
+  </buttons>
+  <misc>
+    <interfaceIndex>0</interfaceIndex>
+    <discoveryMode>false</discoveryMode>
+    <duplicateIgnoreInterval>00:00:50</duplicateIgnoreInterval>
+    <loggingPath></loggingPath>
+    <debugLogging></debugLogging>    
+  </misc>
+</config>

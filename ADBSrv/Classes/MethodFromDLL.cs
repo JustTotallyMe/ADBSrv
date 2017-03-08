@@ -11,13 +11,13 @@ namespace ADBSrv_NS.Classes
         Assembly myDllAssembly;
         int _ButtonID;
 
-        XMLReader newReader = new XMLReader(false, $"{AppDomain.CurrentDomain.BaseDirectory}ButtonConfig.xml");
+        XMLReader newReader = new XMLReader(false, $"{AppDomain.CurrentDomain.BaseDirectory}config.xml");
         Logging logger;
 
-        public void SetAllValues(int buttonID)
+        public void SetAllValues(int buttonID, string loggingPath)
         {
-            logger = new Logging($"{Properties.ADBSrv.Default.LoggingPath}\\MethodCallerLog_ButtonID_{buttonID}.txt");
-            _DLLPath = newReader.returnSingleNodeEntry($"config/buttons/button{buttonID}/DLLPath");
+            logger = new Logging($"{loggingPath}\\MethodCallerLog_ButtonID_{buttonID}.txt");
+            _DLLPath = newReader.returnSingleNodeEntry($"config/buttons/button{buttonID}/dllPath");
 
             logger.WriteErrorLog($"DLLPATH = {_DLLPath}");
 
@@ -31,14 +31,11 @@ namespace ADBSrv_NS.Classes
             type.GetMethod(GetMethodName()).Invoke(Activator.CreateInstance(type), null);
         }
 
-        public void CallMethod(List<string> values)
+        public void CallMethod(string value)
         {
-            object[] newObject = new object[values.Count];
+            object[] newObject = new object [1];
 
-            for (int i = 0; i < values.Count; i++)
-            {
-                newObject[i] = values[i];
-            }
+            newObject[0] = value;
 
             Type type = myDllAssembly.GetType(GetClassName());
             type.GetMethod(GetMethodName()).Invoke(Activator.CreateInstance(type), newObject);
@@ -64,7 +61,7 @@ namespace ADBSrv_NS.Classes
 
                 foreach (var item in buttonValues)
                 {
-                    if (item.Substring(0, item.LastIndexOf('|')) == "ClassName")
+                    if (item.Substring(0, item.LastIndexOf('|')) == "className")
                     {
                         className = item.Substring(item.LastIndexOf('|') + 1);
                         break;
@@ -90,7 +87,7 @@ namespace ADBSrv_NS.Classes
 
             foreach (var item in buttonValues)
             {
-                if (item.Substring(0, item.LastIndexOf('|')) == "MethodName")
+                if (item.Substring(0, item.LastIndexOf('|')) == "methodName")
                 {
                     className = item.Substring(item.LastIndexOf('|') + 1);
                 }

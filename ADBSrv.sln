@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ADBSrv", "ADBSrv\ADBSrv.csproj", "{D25AD9D4-60F8-480B-A7A0-068A6495383B}"
 EndProject
@@ -18,5 +18,14 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 2
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://idea-forge.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = WindowsService1\\ADBSrv.csproj
+		SccProjectName1 = WindowsService1
+		SccLocalPath1 = WindowsService1
 	EndGlobalSection
 EndGlobal

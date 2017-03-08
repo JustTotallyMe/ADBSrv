@@ -1,13 +1,18 @@
-C:\Users\Andy\Documents\Visual Studio 2015\Projects\ARPSnifferSrv-Project\WindowsService1\bin\Release\ButtonConfig.xml
-C:\Users\Andy\Documents\Visual Studio 2015\Projects\ARPSnifferSrv-Project\WindowsService1\bin\Release\ADBSrv.exe.config
-C:\Users\Andy\Documents\Visual Studio 2015\Projects\ARPSnifferSrv-Project\WindowsService1\bin\Release\ADBSrv.exe
-C:\Users\Andy\Documents\Visual Studio 2015\Projects\ARPSnifferSrv-Project\WindowsService1\bin\Release\ADBSrv.pdb
-C:\Users\Andy\Documents\Visual Studio 2015\Projects\ARPSnifferSrv-Project\WindowsService1\bin\Release\PacketDotNet.dll
-C:\Users\Andy\Documents\Visual Studio 2015\Projects\ARPSnifferSrv-Project\WindowsService1\bin\Release\SharpPcap.dll
-C:\Users\Andy\Documents\Visual Studio 2015\Projects\ARPSnifferSrv-Project\WindowsService1\bin\Release\XMLhelper.dll
-C:\Users\Andy\Documents\Visual Studio 2015\Projects\ARPSnifferSrv-Project\WindowsService1\bin\Release\PacketDotNet.xml
-C:\Users\Andy\Documents\Visual Studio 2015\Projects\ARPSnifferSrv-Project\WindowsService1\bin\Release\SharpPcap.xml
-C:\Users\Andy\Documents\Visual Studio 2015\Projects\ARPSnifferSrv-Project\WindowsService1\bin\Release\XMLhelper.xml
-C:\Users\Andy\Documents\Visual Studio 2015\Projects\ARPSnifferSrv-Project\WindowsService1\obj\Release\ADBSrv.csprojResolveAssemblyReference.cache
-C:\Users\Andy\Documents\Visual Studio 2015\Projects\ARPSnifferSrv-Project\WindowsService1\obj\Release\ADBSrv.exe
-C:\Users\Andy\Documents\Visual Studio 2015\Projects\ARPSnifferSrv-Project\WindowsService1\obj\Release\ADBSrv.pdb
+C:\Users\Andy\VS-TFS-Workspace\Tools\ADBSrv-Project\ADBSrv\bin\Release\ADBSrv.exe.config
+C:\Users\Andy\VS-TFS-Workspace\Tools\ADBSrv-Project\ADBSrv\bin\Release\config.xml
+C:\Users\Andy\VS-TFS-Workspace\Tools\ADBSrv-Project\ADBSrv\bin\Release\ADBSrv.exe
+C:\Users\Andy\VS-TFS-Workspace\Tools\ADBSrv-Project\ADBSrv\bin\Release\ADBSrv.pdb
+C:\Users\Andy\VS-TFS-Workspace\Tools\ADBSrv-Project\ADBSrv\bin\Release\PacketDotNet.dll
+C:\Users\Andy\VS-TFS-Workspace\Tools\ADBSrv-Project\ADBSrv\bin\Release\SharpPcap.dll
+C:\Users\Andy\VS-TFS-Workspace\Tools\ADBSrv-Project\ADBSrv\bin\Release\XMLhelper.dll
+C:\Users\Andy\VS-TFS-Workspace\Tools\ADBSrv-Project\ADBSrv\bin\Release\PacketDotNet.xml
+C:\Users\Andy\VS-TFS-Workspace\Tools\ADBSrv-Project\ADBSrv\bin\Release\SharpPcap.xml
+C:\Users\Andy\VS-TFS-Workspace\Tools\ADBSrv-Project\ADBSrv\bin\Release\XMLhelper.xml
+C:\Users\Andy\VS-TFS-Workspace\Tools\ADBSrv-Project\ADBSrv\obj\Release\ADBSrv.csprojResolveAssemblyReference.cache
+C:\Users\Andy\VS-TFS-Workspace\Tools\ADBSrv-Project\ADBSrv\obj\Release\ADBSrv_NS.ADBSrv.resources
+C:\Users\Andy\VS-TFS-Workspace\Tools\ADBSrv-Project\ADBSrv\obj\Release\ADBSrv.csproj.GenerateResource.Cache
+C:\Users\Andy\VS-TFS-Workspace\Tools\ADBSrv-Project\ADBSrv\obj\Release\ADBSrv.exe
+C:\Users\Andy\VS-TFS-Workspace\Tools\ADBSrv-Project\ADBSrv\obj\Release\ADBSrv.pdb
+C:\Users\Andy\GitHubRepo\ADBSrv\ADBSrv\bin\Release\ADBSrv.exe.config
+C:\Users\Andy\GitHubRepo\ADBSrv\ADBSrv\obj\Release\ADBSrv.exe
+C:\Users\Andy\GitHubRepo\ADBSrv\ADBSrv\obj\Release\ADBSrv.pdb

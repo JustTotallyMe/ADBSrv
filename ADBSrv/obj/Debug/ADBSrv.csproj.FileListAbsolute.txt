@@ -1,18 +1,1 @@
-C:\Users\Andy\Documents\Visual Studio 2015\Projects\ARPSnifferSrv-Project\WindowsService1\bin\Debug\ADBSrv.exe.config
-C:\Users\Andy\Documents\Visual Studio 2015\Projects\ADBSrv-Project\ADBSrv\bin\Debug\ADBSrv.exe.config
-C:\Users\Andy\Documents\Visual Studio 2015\Projects\ADBSrv-Project\ADBSrv\bin\Debug\ButtonConfig.xml
-C:\Users\Andy\Documents\Visual Studio 2015\Projects\ADBSrv-Project\ADBSrv\bin\Debug\ADBSrv.exe.manifest
-C:\Users\Andy\Documents\Visual Studio 2015\Projects\ADBSrv-Project\ADBSrv\bin\Debug\ADBSrv.application
-C:\Users\Andy\Documents\Visual Studio 2015\Projects\ADBSrv-Project\ADBSrv\bin\Debug\ADBSrv.exe
-C:\Users\Andy\Documents\Visual Studio 2015\Projects\ADBSrv-Project\ADBSrv\bin\Debug\ADBSrv.pdb
-C:\Users\Andy\Documents\Visual Studio 2015\Projects\ADBSrv-Project\ADBSrv\bin\Debug\PacketDotNet.dll
-C:\Users\Andy\Documents\Visual Studio 2015\Projects\ADBSrv-Project\ADBSrv\bin\Debug\SharpPcap.dll
-C:\Users\Andy\Documents\Visual Studio 2015\Projects\ADBSrv-Project\ADBSrv\bin\Debug\XMLhelper.dll
-C:\Users\Andy\Documents\Visual Studio 2015\Projects\ADBSrv-Project\ADBSrv\bin\Debug\PacketDotNet.xml
-C:\Users\Andy\Documents\Visual Studio 2015\Projects\ADBSrv-Project\ADBSrv\bin\Debug\SharpPcap.xml
-C:\Users\Andy\Documents\Visual Studio 2015\Projects\ADBSrv-Project\ADBSrv\bin\Debug\XMLhelper.xml
-C:\Users\Andy\Documents\Visual Studio 2015\Projects\ADBSrv-Project\ADBSrv\obj\Debug\ADBSrv.csprojResolveAssemblyReference.cache
-C:\Users\Andy\Documents\Visual Studio 2015\Projects\ADBSrv-Project\ADBSrv\obj\Debug\ADBSrv.exe.manifest
-C:\Users\Andy\Documents\Visual Studio 2015\Projects\ADBSrv-Project\ADBSrv\obj\Debug\ADBSrv.application
-C:\Users\Andy\Documents\Visual Studio 2015\Projects\ADBSrv-Project\ADBSrv\obj\Debug\ADBSrv.exe
-C:\Users\Andy\Documents\Visual Studio 2015\Projects\ADBSrv-Project\ADBSrv\obj\Debug\ADBSrv.pdb
+C:\Users\Andy\VS-TFS-Workspace\Tools\ADBSrv-Project\ADBSrv\bin\Debug\ADBSrv.exe.config

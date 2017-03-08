@@ -7,65 +7,65 @@ using ADBSrv_NS.Classes;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Threading.Tasks;
+using XMLhelper;
+using System.Diagnostics;
+using System.IO;
 
 namespace ADBSrv_NS
 {
-    public partial class ADBSrv_Main : ServiceBase
+    public partial class ADBSrv : ServiceBase
     {
         private const int ReadTimeoutMilliseconds = 1000;
+        XMLReader _configReader = new XMLReader(false, $"{AppDomain.CurrentDomain.BaseDirectory}config.xml");
         ICaptureDevice device;
-        Logging generalLog = new Logging($"{Properties.ADBSrv.Default.LoggingPath}\\GeneralLog.txt");
-        Logging ARPLog = new Logging($"{Properties.ADBSrv.Default.LoggingPath}\\ARPLog.txt");
+        Logging generalLog;
+        Logging ARPLog;
         List<PhysicalAddress> MACList = new List<PhysicalAddress>();
         List<DateTime> lastEventTimersList = new List<DateTime>();
         List<MethodFromDLL> methodCallerList = new List<MethodFromDLL>();
         Dictionary<PhysicalAddress, int> MACdict = new Dictionary<PhysicalAddress, int>();
+        Dictionary<string, string> configMisc = new Dictionary<string, string>();
+        Dictionary<string, Dictionary<string, string>> buttonDict = new Dictionary<string, Dictionary<string, string>>();
 
-        public ADBSrv_Main()
+        configReader newReaderHelper;
+
+        public ADBSrv()
         {
             InitializeComponent();
+
+            try
+            {
+                generalLog = new Logging($"{_configReader.returnSingleNodeEntry("config/misc/loggingPath")}\\GeneralLog.txt");
+                ARPLog = new Logging($"{_configReader.returnSingleNodeEntry("config/misc/loggingPath")}\\ARPLog.txt");
+                newReaderHelper = new configReader(_configReader);
+            }
+            catch (Exception e)
+            {
+                StreamWriter sw = new StreamWriter(@"C:\temp\test.txt", true);
+                sw.WriteLine(e.Message);
+                sw.WriteLine(e.StackTrace);
+                sw.Flush();
+                sw.Close();
+                Environment.Exit(1337);
+            }
         }
 
         protected override void OnStart(string[] args)
         {
             try
             {
-                int counter = 0;
-                foreach (SettingsProperty item in Properties.ADBSrv.Default.Properties)
-                {
-                    if (item.Name.ToLower().StartsWith("dash"))
-                    {
-                        counter++;
-                        if (Properties.ADBSrv.Default.DebugLogging)
-                        {
-                            generalLog.WriteErrorLog($"Found Property: {Properties.ADBSrv.Default[item.Name]}");
-                        }
-                    }
-                }
+                readConfigMiscToDict();
+                readConfigButtonsToDict();
 
-                string[] orderArray = new string[counter];
-
-                foreach (SettingsProperty item in Properties.ADBSrv.Default.Properties)
+                for (int i = 0; i < buttonDict.Keys.Count; i++)
                 {
-                    if (item.Name.ToLower().StartsWith("dash"))
-                    {
-                        int dashButtonNumber = Convert.ToInt32(item.Name.Substring(item.Name.LastIndexOf('c') + 1));
-                        if (Properties.ADBSrv.Default.DebugLogging)
-                        {
-                            generalLog.WriteErrorLog($"Adding {item.Name} to array");
-                        }
-                        orderArray[dashButtonNumber - 1] = item.Name;
-                    }
-                }
+                    //generalLog.WriteErrorLog($"Button ID = {i}");
+                    
+                    string tempMac = buttonDict[$"button{i + 1}"]["mac"];
 
-                foreach (var item in orderArray)
-                {
-                    if (Properties.ADBSrv.Default.DebugLogging)
-                    {
-                        generalLog.WriteErrorLog($"Current item is {item}");
-                        generalLog.WriteErrorLog($"Adding {PhysicalAddress.Parse(Properties.ADBSrv.Default[item].ToString().Replace("-", "").Replace(":", "").ToUpper())} to MacList");
-                    }
-                    MACList.Add(PhysicalAddress.Parse(Properties.ADBSrv.Default[item].ToString().Replace("-", "").Replace(":", "").ToUpper()));
+                    //generalLog.WriteErrorLog($"Curent MAC = {tempMac}");
+
+                    MACList.Add(PhysicalAddress.Parse(tempMac.ToString().Replace("-", "").Replace(":", "").ToUpper()));
                 }
 
                 int loopCounter = MACList.Count;
@@ -91,7 +91,7 @@ namespace ADBSrv_NS
                     return;
                 }
 
-                if (Properties.ADBSrv.Default.DebugLogging)
+                if (Convert.ToBoolean(configMisc["debugLogging"]))
                 {
                     generalLog.WriteErrorLog("The following devices are available on this machine:");
 
@@ -102,24 +102,25 @@ namespace ADBSrv_NS
                     }
                 }
 
-                device = devices[Properties.ADBSrv.Default.InterfaceIndex];
+                device = devices[Convert.ToInt32(configMisc["interfaceIndex"])];
                 device.OnPacketArrival += device_OnPacketArrival;
                 device.Open(DeviceMode.Promiscuous, ReadTimeoutMilliseconds);
                 device.StartCapture();
 
-                if (Properties.ADBSrv.Default.DebugLogging)
+                if (Convert.ToBoolean(configMisc["debugLogging"]))
                 {
                     generalLog.WriteErrorLog($"loopcounter {loopCounter}");
                     generalLog.WriteErrorLog($"lastEventTimerCount: {lastEventTimersList.Count}");
                 }
 
-                generalLog.WriteErrorLog($"-- Listening on {Properties.ADBSrv.Default.InterfaceIndex} --");
+                generalLog.WriteErrorLog($"-- Listening on {configMisc["interfaceIndex"]} --");
             }
             catch (Exception e)
             {
                 generalLog.WriteErrorLog($"Message: {e.Message}");
                 generalLog.WriteErrorLog("---------------");
                 generalLog.WriteErrorLog(e.StackTrace);
+
                 Environment.Exit(1337);
             }
         }
@@ -136,7 +137,7 @@ namespace ADBSrv_NS
             for (int o = 0; o < loopCounter; o++)
             {
                 methodCallerList.Add(new MethodFromDLL());
-                methodCallerList[o].SetAllValues(o + 1);
+                methodCallerList[o].SetAllValues(o + 1, configMisc["loggingPath"]);
             }
         }
 
@@ -150,6 +151,7 @@ namespace ADBSrv_NS
             this.Dispose();
             GC.Collect();
             generalLog.WriteErrorLog("GC after: " + GC.GetTotalMemory(false));
+            //eventLog1.WriteEntry("Server stopped");
         }
 
         private void device_OnPacketArrival(object sender, CaptureEventArgs e)
@@ -168,11 +170,11 @@ namespace ADBSrv_NS
                     packet = packet.PayloadPacket;
                 }
             }
-            catch (Exception exce)
+            catch (Exception E)
             {
-                generalLog.WriteErrorLog(exce.Message);
+                generalLog.WriteErrorLog(E.Message);
                 generalLog.WriteErrorLog("-------------------");
-                generalLog.WriteErrorLog(exce.StackTrace);
+                generalLog.WriteErrorLog(E.StackTrace);
 
                 Environment.Exit(1337);
             }
@@ -180,7 +182,7 @@ namespace ADBSrv_NS
 
         private void HandleArpPacket(ARPPacket arpPacket)
         {
-            if (Properties.ADBSrv.Default.DiscoveryMode)
+            if (Convert.ToBoolean(configMisc["discoveryMode"]))
             {
                 ARPLog.WriteErrorLog(arpPacket.ToString());
                 ARPLog.WriteErrorLog("-----------------------------------");
@@ -195,10 +197,9 @@ namespace ADBSrv_NS
                 {
                     if (arpPacket.SenderHardwareAddress.Equals(item))
                     {
-                        generalLog.WriteErrorLog($"IF DashButton {MACdict[item].ToString()}");
-
-                        if (Properties.ADBSrv.Default.DebugLogging)
+                        if (Convert.ToBoolean(configMisc["debugLogging"]))
                         {
+                            generalLog.WriteErrorLog($"IF DashButton {MACdict[item].ToString()}");
                             generalLog.WriteErrorLog("IF: " + item.ToString());
                         }
 
@@ -207,7 +208,7 @@ namespace ADBSrv_NS
                     }
                     else
                     {
-                        if (Properties.ADBSrv.Default.DebugLogging)
+                        if (Convert.ToBoolean(configMisc["debugLogging"]))
                         {
                             generalLog.WriteErrorLog($"Else DashButton {MACdict[item].ToString()}");
                             generalLog.WriteErrorLog("Else: " + item.ToString());
@@ -219,21 +220,37 @@ namespace ADBSrv_NS
 
         void processButtonPress(int callerID)
         {
-            if (Properties.ADBSrv.Default.DebugLogging)
+            if (Convert.ToBoolean(configMisc["debugLogging"]))
             {
                 ARPLog.WriteErrorLog(DateTime.Now + " Dash ARP");
             }
 
             if (isIntervalOver(callerID))
             {
-                if (Properties.ADBSrv.Default.DebugLogging)
+                if (Convert.ToBoolean(configMisc["debugLogging"]))
                 {
-                    generalLog.WriteErrorLog($"DashButton{callerID} event captured");
+                    generalLog.WriteErrorLog($"DashButton {buttonDict[$"button{callerID}"]["name"]} event captured");
                 }
 
-                generalLog.WriteErrorLog($"Found {methodCallerList.Count} methodCall objects");
-                Task.Factory.StartNew(() => { CallMethodFromMethodCaller(callerID); });
-                //CallMethodFromMethodCaller(callerID);
+                //generalLog.WriteErrorLog($"Found {methodCallerList.Count} methodCall objects");
+
+                if (buttonDict[$"button{callerID}"]["overloadValue"] == "0")
+                {
+                    Task.Factory.StartNew(() => { CallMethodFromMethodCaller(callerID); });
+                    //CallMethodFromMethodCaller(callerID); 
+                }
+                else
+                {
+                    Task.Factory.StartNew(() => { CallMethodFromMethodCaller(callerID, buttonDict[$"button{callerID}"]["overloadValue"]); });
+                    //CallMethodFromMethodCaller(callerID, buttonDict[$"button{callerID}"]["overloadValue"]);
+                }
+            }
+            else
+            {
+                if (Convert.ToBoolean(configMisc["debugLogging"]))
+                {
+                    generalLog.WriteErrorLog($"Interval for \"{buttonDict[$"button{callerID}"]["name"]}\" not ready yet");
+                }
             }
         }
 
@@ -242,16 +259,23 @@ namespace ADBSrv_NS
             methodCallerList[callerID -1].CallMethod();
         }
 
+        void CallMethodFromMethodCaller(int callerID, string value)
+        {
+            methodCallerList[callerID - 1].CallMethod(value);
+        }
+
         bool isIntervalOver(int callerID)
         {
-            if (Properties.ADBSrv.Default.DebugLogging)
+            TimeSpan duplicateIgnoreInterval = TimeSpan.Parse(configMisc["duplicateIgnoreInterval"]);
+
+            if (Convert.ToBoolean(configMisc["debugLogging"]))
             {
                 generalLog.WriteErrorLog($"CallerID = {callerID}");
                 generalLog.WriteErrorLog($"Found {lastEventTimersList.Count} lastEventTimers");
             }
 
             var now = DateTime.Now;
-            if (now - Properties.ADBSrv.Default.DuplicateIgnoreInterval > lastEventTimersList[callerID - 1])
+            if (now - duplicateIgnoreInterval > lastEventTimersList[callerID - 1])
             {
                 lastEventTimersList[callerID - 1] = now;
                 return true;
@@ -260,6 +284,16 @@ namespace ADBSrv_NS
             {
                 return false;
             }
+        }
+
+        void readConfigMiscToDict()
+        {
+            configMisc = newReaderHelper.GetMiscFromConfig();
+        }
+
+        void readConfigButtonsToDict()
+        {
+            buttonDict = newReaderHelper.GetButtonsWithParameters();
         }
     }
 }
