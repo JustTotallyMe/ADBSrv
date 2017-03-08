@@ -7,41 +7,32 @@ Parts of the code are from user "Youresam" https://github.com/youresam/Dash-Butt
 
 The Service can be configured like this:
 
-There are 2 config-files:
+There is one config-file:
 
-1) ADBSrv.exe.config:
+1) config.xml
 
-Inside this config you need to enter the MAC-Address of the Dashbutton you like to use.
-Also you can set the following things:
+Inside this config-file you setup the buttons and other configurations.
+(Just have a look into the config.xml inside the project)
 
--InterfaceIndex (default is 0)
--DuplicateIgnoreInterval (the time you have to wait until the button-event is working again)
--LogginPath (Make sure to just set the path to some folder and not to a file)
--DebugLogging
+The important part is actually the "buttons" tag.
 
-To set up the dashbuttons inside this config, you simply need to add the following tag:
-
-<setting name="DashMac1" serializeAs="String">
-  <value>MAC-ADDRESS with : </value>
-</setting>
-
-The name has to start with the word "Dash" and needs to end with a continous number. So if you add a forth button to the config the name
-should be "DashMac4".
-
-2) ButtonConfig.xml
-
-In this config you set up the DLLs and used Class- and Method-name which is being executed when the butto-press was detected.
-
-If you want to add a new button to the config file, you need to add a whole button-tag inside the "buttons" tag.
-So if we go with the example from above, you would add the following tag inside "buttons":
+(Here is an example of on button inside the "buttons" tag, but since it is not correctly displayed, you can switch to "RAW" to see the xml-part)
 
 <button4>
-  <name>Call me what ever you like</name>
-  <MACaddress>AC:63:BE:03:D1:34</MACaddress>
-  <DLLPath>C:\Temp\test.dll</DLLPath>
-  <ClassName>TestClass</ClassName>
-  <MethodName>HelloWorld</MethodName>
+  <name>AnyButtonName</name>
+   <mac>FF:FF:FF:FF:FF:FF</mac>
+   <dllPath>AnyPath</dllPath>
+   <className>TestClass</className>
+   <methodName>HelloWorld</methodName>
+   <overloadValue>0</overloadValue>
 </button4>
 
-After these steps, you should be good to go.
-Let me know if something is unclear or if you struggling to get this project/service running.
+Parameter explanation:
+
+name: This is just for debugging, so you can put in anything you like (I did out in the brand of the Dashbutton)
+mac: In this tag goes the MAC-address of the button (if you do not know how to find the MAC of your Dashbutton just ask Google :) )
+dllPath: This is the path to the DLL that should be triggered if you press the button
+className: Put in the name of the class your method you want to call is in
+methodName: The method which should be called by the button
+overloadValue: If your method requires parameters, you need to put them in here
+              (NOTE: at the moment it only supports a string but this might be changed later on)
